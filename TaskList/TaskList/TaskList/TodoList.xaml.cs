@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,7 +28,10 @@ namespace TaskList
         private async Task AddItem(TodoItem item)
         {
             await manager.SaveTaskAsync(item);
+            Collection<TodoItem> s = new Collection<TodoItem>();
             todoList.ItemsSource = await manager.GetTodoItemsAsync();
+            s = await manager.GetTodoItemsAsync();
+            Debug.WriteLine(s[0].Text+"/"+s[0].Id+"/"+s[0].Version+"/"+s[0].Done);
         }
 
         private async Task CompleteItem(TodoItem item)

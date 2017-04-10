@@ -87,11 +87,9 @@ namespace TaskList
                     await SyncAsync();
                 }
 #endif
-
                 IEnumerable<TodoItem> items = await todoTable
                     .Where(item => !item.Done)
                     .ToEnumerableAsync();
-
                 return new ObservableCollection<TodoItem>(items);
             }
             catch (MobileServiceInvalidOperationException msioe)
